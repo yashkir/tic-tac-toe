@@ -13,8 +13,8 @@
   width: 250px;
   height: 250px;
   display: grid;
-  grid-template-columns: 30% 30% 30%;
-  grid-template-rows: 30% 30% 30%;
+  grid-template-columns: repeat(3, 30%);
+  grid-template-rows: repeat(3, 30%);
   justify-content: space-between;
   align-content: space-between;
 }
