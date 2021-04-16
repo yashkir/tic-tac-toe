@@ -1,0 +1,28 @@
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.game {
+  display: flex;
+  flex-direction: column;
+}
+
+.board {
+  background-color: navy;
+  width: 250px;
+  height: 250px;
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  grid-template-rows: 30% 30% 30%;
+  justify-content: space-between;
+  align-content: space-between;
+}
+
+.square {
+  background-color: white;
+}
+
+.controls {
+  margin: 1em;
+}
