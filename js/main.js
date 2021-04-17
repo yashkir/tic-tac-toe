@@ -35,7 +35,7 @@ class TicTacToe {
         this.squareEls = document.querySelectorAll(`${selector} .board > .square`);
         this.statusEl = document.querySelector(`${selector} .status`);
         this.resetGameBtn = document.querySelector(`${selector} .reset-game-btn`);
-        
+
         this.boardEl.addEventListener("click", this.boardClickHandler.bind(this));
         this.resetGameBtn.addEventListener("click", this.resetGame.bind(this));
     }
@@ -67,7 +67,7 @@ class TicTacToe {
             // TODO move the logic out of the click handler
             let winner = this.getWinner();
             if (winner !== null) {
-                this.renderWinner(winner); 
+                this.renderWinner(winner);
             }
 
             this.activePlayer *= -1;
