@@ -18,19 +18,9 @@ class TicTacToe {
         '0': '',
     }
 
+    static lastTurn = 8;
+
     constructor (selector) {
-        this.squares = [
-            0, 0, 0,
-            0, 0, 0,
-            0, 0, 0,
-        ];
-
-        this.turn = 0;
-        this.lastTurn = 8;
-        this.games = [];
-
-        this.activePlayer = -1;
-
         this.boardEl = document.querySelector(`${selector} .board`);
         this.squareEls = document.querySelectorAll(`${selector} .board > .square`);
         this.statusEl = document.querySelector(`${selector} .status`);
@@ -38,6 +28,27 @@ class TicTacToe {
 
         this.boardEl.addEventListener("click", this.boardClickHandler.bind(this));
         this.resetGameBtn.addEventListener("click", this.resetGame.bind(this));
+
+        this.resetGame();
+    }
+
+    initializeBoard() {
+        this.squares = [
+            0, 0, 0,
+            0, 0, 0,
+            0, 0, 0,
+        ];
+
+        this.turn = 0;
+        this.gameOver = false;
+        this.games = [];
+        this.activePlayer = -1;
+    }
+
+    renderAllSquares() {
+        this.squares.forEach((square, index) => {
+            this.renderSquare(index);
+        });
     }
 
     renderSquare(n) {
@@ -59,7 +70,7 @@ class TicTacToe {
     boardClickHandler(event) {
         let n = event.target.id[event.target.id.length - 1] - 1;
 
-        if (this.squares[n] === 0) {
+        if (this.squares[n] === 0 && this.gameOver !== true) {
             this.squares[n] = this.activePlayer;
 
             this.renderSquare(n);
@@ -67,6 +78,8 @@ class TicTacToe {
             // TODO move the logic out of the click handler
             let winner = this.getWinner();
             if (winner !== null) {
+                this.gameOver = true;
+                this.games.push(winner);
                 this.renderWinner(winner);
             }
 
@@ -95,7 +108,7 @@ class TicTacToe {
             }
         }
 
-        if (this.turn === this.lastTurn) {
+        if (this.turn === this.constructor.lastTurn) {
             return 0;
         } else {
             return null;
@@ -103,7 +116,8 @@ class TicTacToe {
     }
 
     resetGame() {
-
+        this.initializeBoard();
+        this.renderAllSquares();
     }
 }
 
