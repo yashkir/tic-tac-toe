@@ -67,6 +67,11 @@ class TicTacToe {
         this.statusEl.textContent = text;
     }
 
+    renderTurn(text) {
+        this.statusEl.textContent = this.constructor.symbols[this.activePlayer] +
+                                    "'s Turn";
+    }
+
     boardClickHandler(event) {
         let n = event.target.id[event.target.id.length - 1] - 1;
 
@@ -81,10 +86,11 @@ class TicTacToe {
                 this.gameOver = true;
                 this.games.push(winner);
                 this.renderWinner(winner);
+            } else {
+                this.activePlayer *= -1;
+                this.turn++;
+                this.renderTurn();
             }
-
-            this.activePlayer *= -1;
-            this.turn++;
         }
     }
 
@@ -118,6 +124,7 @@ class TicTacToe {
     resetGame() {
         this.initializeBoard();
         this.renderAllSquares();
+        this.renderTurn();
     }
 }
 
